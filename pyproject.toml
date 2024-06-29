@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "nullval"
+version = "0.1.0"
+description = "A package for the treatment of nullvalues and outliers in your data set using various mathematical approaches "
+authors = ["Mukul namagiri <mukulnamagiri1@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/Mukullight/nullval"
+repository = "https://github.com/Mukullight/nullval"
+keywords = ["finance","dataloader","outliers_finder","Nullvalue_finder",""]
+classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Operating System :: OS Independent",
+    ]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
