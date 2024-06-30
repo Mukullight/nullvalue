@@ -44,6 +44,7 @@ nullvalue/
 ## requirements for the package 
 
 They are already added to the toml file but in case 
+```
 pandas==1.3.3
 numpy==1.21.4
 tqdm
@@ -53,7 +54,7 @@ matplotlib==3.5.1
 statsmodels==0.13.0
 tensorflow==2.8.0
 plotly==5.5.0
-
+```
 
 # Getting started with the repository 
 
