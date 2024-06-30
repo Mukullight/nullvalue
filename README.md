@@ -41,34 +41,36 @@ nullvalue/
 │
 └── README.md
 ```
+## requirements for the package 
+
+They are already added to the toml file but in case 
+pandas==1.3.3
+numpy==1.21.4
+tqdm
+scikit-learn==0.24.2
+seaborn==0.11.2
+matplotlib==3.5.1
+statsmodels==0.13.0
+tensorflow==2.8.0
+plotly==5.5.0
 
 
-Creating A Server
+# Getting started with the repository 
 
 ```python
-from vidstream import StreamingServer
 
-server = StreamingServer('127.0.0.1', 9999)
-server.start_server()
 
-# Other Code
 
-# When You Are Done
-server.stop_server()
+
 ```
 
 Creating A Client
 ```python
-from vidstream import CameraClient
-from vidstream import VideoClient
-from vidstream import ScreenShareClient
 
-# Choose One
-client1 = CameraClient('127.0.0.1', 9999)
-client2 = VideoClient('127.0.0.1', 9999, 'video.mp4')
-client3 = ScreenShareClient('127.0.0.1', 9999)
 
-client1.start_stream()
-client2.start_stream()
-client3.start_stream()
+
+
+
+
+
 ```
