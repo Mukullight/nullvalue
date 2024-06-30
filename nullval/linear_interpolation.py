@@ -1,11 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
+from pydantic 
 
-def __init__():
-    linear_interpolation()
-
-def linear_interpolation(x_points, y_points, x_new):
+def li_int(x_points, y_points, x_new):
     """
     Perform linear interpolation on a set of data points.
 
@@ -29,7 +27,7 @@ def linear_interpolation(x_points, y_points, x_new):
 
     return y_new
 
-def plot_interpolation(x_points, y_points, x_new, y_new):
+def plot_li_int(x_points, y_points, x_new, y_new):
     """
     Plot the original data points and the interpolated values.
 
