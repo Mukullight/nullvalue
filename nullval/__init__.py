@@ -7,5 +7,5 @@ from .nearest_neighbor_interpolation import *
 from .polynomial_interpolation import *
 from .spline_interpolation import *
 from .trigonometric_interpolation import *
-
+from .loader import *
 
