@@ -7,13 +7,15 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 import plotly.graph_objs as go
 
+##########################################################################################
+'''Cubic Spline Interpolation:
+
+Use Case: When smoothness of the interpolated function is crucial and you have enough data points.
+Advantages: Provides smooth interpolation, avoids oscillations.
+Limitations: More complex than linear or polynomial interpolation, can be computationally intensive.'''
 
 
-
-
-
-
-
+####### Compute functions ###################################################
 def compute_cubic_spline_multi(x, y, x_new_sets):
     """
     Computes cubic spline interpolation for multiple sets of new x-coordinates.
@@ -40,7 +42,7 @@ def compute_cubic_spline_multi(x, y, x_new_sets):
     
     return y_new_sets
 
-
+###################    plot functions ##################################################################
 
 def plot_cubic_spline_multi(x, y, x_new_sets, y_new_sets):
     """
@@ -79,7 +81,7 @@ def plot_cubic_spline_multi(x, y, x_new_sets, y_new_sets):
         xaxis_title='x',
         yaxis_title='y',
         legend=dict(x=0, y=1),
-        plot_bgcolor='white'
+        plot_bgcolor='black'
     )
 
     # Show the plot
