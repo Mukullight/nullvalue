@@ -77,6 +77,7 @@ def plot_polynomial_interpolation(x, y, degree, x_new):
     # Show plot
     fig.show()
 
+'''
 # Example usage:
 x = np.array([1.0, 2.0, 3.0, 4.0])
 y = np.array([1.0, 4.0, 9.0, 16.0])
@@ -85,3 +86,6 @@ x_new = np.linspace(min(x), max(x), 100)  # New x-values for interpolation
 
 # Plot polynomial interpolation and compute interpolated y values
 plot_polynomial_interpolation(x, y, degree, x_new)
+
+
+'''

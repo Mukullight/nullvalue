@@ -88,7 +88,9 @@ def plot_cubic_spline_multi(x, y, x_new_sets, y_new_sets):
     fig.show()
 
 
-x = np.array([0, 1, 2, 3, 4, 5])
+
+'''
+ = np.array([0, 1, 2, 3, 4, 5])
 y = np.array([0, 1, 4, 1, 0, 1])
 
  # Define multiple sets of new x-coordinates
@@ -101,4 +103,8 @@ y_new_sets = compute_cubic_spline_multi(x, y, x_new_sets)
 
     # Plot the results
 plot_cubic_spline_multi(x, y, x_new_sets, y_new_sets)
+
+'''
+
+x
 
