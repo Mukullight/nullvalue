@@ -1,7 +1,9 @@
 import pandas as pd
 import xml.etree.ElementTree as ET
+############### loading the required files #############################################
+################# formatting it to the required format ################################
 
-def load_file_to_dataframe(file_path):
+def load_to_df(file_path):
     """
     Load data from CSV, XML, Excel, or JSON file into a Pandas DataFrame.
 
@@ -51,5 +53,80 @@ def load_file_to_dataframe(file_path):
         print(f"Error loading file '{file_path}':")
         print(e)
         return None
+
+
+#################### passing the data frame ##################################
+################### spotting the location of the outliers #####################
+
+
+
+def nulls_and_outs(df, q1=0.25, q3=0.75):
+    """
+    Finds the locations of null values and outliers in a DataFrame, and drops columns with categorical variables.
+
+    Parameters:
+    df (pd.DataFrame): The input DataFrame.
+    q1 (float): The lower quartile value.
+    q3 (float): The upper quartile value.
+
+    Returns:
+    dict: A dictionary with two keys 'nulls' and 'outliers', each containing the locations of null values and outliers respectively.
+    pd.DataFrame: The DataFrame after dropping categorical columns.
+    """
+    # Drop categorical columns
+    df = df.select_dtypes(exclude=['object', 'category'])
+
+    null_locations = {}
+    outlier_locations = {}
+    
+    # Identify null values
+    nulls = df.isnull()
+    for col in df.columns:
+        null_indices = nulls.index[nulls[col]].tolist()
+        if null_indices:
+            null_locations[col] = null_indices
+    
+    # Identify outliers using IQR method
+    for col in df.select_dtypes(include=[pd.np.number]).columns:  # Consider only numeric columns
+        Q1 = df[col].quantile(q1)
+        Q3 = df[col].quantile(q3)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)]
+        if not outliers.empty:
+            outlier_locations[col] = outliers.index.tolist()
+    
+    return {
+        'nulls': null_locations,
+        'outliers': outlier_locations
+    }, df
+
+
+
+
+
+"""
+data = {
+    'A': [1, 2, 3, None, 5, 100],
+    'B': [10, 12, None, 14, 16, 18],
+    'C': ['cat', 'dog', 'cat', 'dog', 'cat', 'dog'],
+    'D': [1, 1, 1, 1, 1, 1]
+}
+df = pd.DataFrame(data)
+
+result, df_cleaned = find_nulls_and_outliers(df, q1=0.25, q3=0.75)
+print("Null values:", result['nulls'])
+print("Outliers:", result['outliers'])
+print("DataFrame after dropping categorical columns:")
+print(df_cleaned)
+
+
+
+
+
+
+
+"""
 
 
