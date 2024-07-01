@@ -106,6 +106,7 @@ def nulls_and_outs(df, q1=0.05, q3=0.95):
         
         # Store outliers in dictionary
         outlier_indices[col] = outliers
+        
     return {
         "upper": upper_bound,
         "lower":lower_bound,

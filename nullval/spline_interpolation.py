@@ -42,7 +42,7 @@ def compute_cubic_spline_multi(x, y, x_new_sets):
     
     return y_new_sets
 
-###################    plot functions ##################################################################
+###################    plot functions      ##################################################################
 
 def plot_cubic_spline_multi(x, y, x_new_sets, y_new_sets):
     """
