@@ -1,5 +1,9 @@
+import numpy as np 
 import pandas as pd
 import xml.etree.ElementTree as ET
+
+
+
 ############### loading the required files #############################################
 ################# formatting it to the required format ################################
 
@@ -60,14 +64,14 @@ def load_to_df(file_path):
 
 
 
-def nulls_and_outs(df, q1=0.25, q3=0.75):
+def nulls_and_outs(df, q1=0.05, q3=0.95):
     """
     Finds the locations of null values and outliers in a DataFrame, and drops columns with categorical variables.
 
     Parameters:
     df (pd.DataFrame): The input DataFrame.
-    q1 (float): The lower quartile value.
-    q3 (float): The upper quartile value.
+    q1 (float): The lower quartile value. Default is 0.25.
+    q3 (float): The upper quartile value. Default is 0.75.
 
     Returns:
     dict: A dictionary with two keys 'nulls' and 'outliers', each containing the locations of null values and outliers respectively.
@@ -77,7 +81,7 @@ def nulls_and_outs(df, q1=0.25, q3=0.75):
     df = df.select_dtypes(exclude=['object', 'category'])
 
     null_locations = {}
-    outlier_locations = {}
+    outlier_indices = {}
     
     # Identify null values
     nulls = df.isnull()
@@ -85,48 +89,52 @@ def nulls_and_outs(df, q1=0.25, q3=0.75):
         null_indices = nulls.index[nulls[col]].tolist()
         if null_indices:
             null_locations[col] = null_indices
-    
-    # Identify outliers using IQR method
-    for col in df.select_dtypes(include=[pd.np.number]).columns:  # Consider only numeric columns
+
+    # Iterate over numeric columns
+    for col in df.select_dtypes(include='number').columns:
+        # Calculate quartiles and IQR
         Q1 = df[col].quantile(q1)
         Q3 = df[col].quantile(q3)
         IQR = Q3 - Q1
+        
+        # Define outlier boundaries
         lower_bound = Q1 - 1.5 * IQR
         upper_bound = Q3 + 1.5 * IQR
-        outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)]
-        if not outliers.empty:
-            outlier_locations[col] = outliers.index.tolist()
-    
+        
+        # Find indices of outliers
+        outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)].index.tolist()
+        
+        # Store outliers in dictionary
+        outlier_indices[col] = outliers
     return {
+        "upper": upper_bound,
+        "lower":lower_bound,
         'nulls': null_locations,
-        'outliers': outlier_locations
+        'outliers': outlier_indices
     }, df
 
 
 
-
-
 """
+
+# Example usage:
 data = {
     'A': [1, 2, 3, None, 5, 100],
     'B': [10, 12, None, 14, 16, 18],
-    'C': ['cat', 'dog', 'cat', 'dog', 'cat', 'dog'],
-    'D': [1, 1, 1, 1, 1, 1]
+    'C': ['cat', 'dog', 'cat', 'dog', 'cat', 'dog']
 }
 df = pd.DataFrame(data)
 
-result, df_cleaned = find_nulls_and_outliers(df, q1=0.25, q3=0.75)
+# Override quartile values
+q1_override = 0.25
+q3_override = 0.75
+
+result, df_cleaned = nulls_and_outs(df, q1=q1_override, q3=q3_override)
+print(result["lower"])
+print(result["upper"])
 print("Null values:", result['nulls'])
 print("Outliers:", result['outliers'])
 print("DataFrame after dropping categorical columns:")
 print(df_cleaned)
 
-
-
-
-
-
-
 """
-
-
