@@ -114,6 +114,32 @@ def nulls_and_outs(df, q1=0.05, q3=0.95):
         'outliers': outlier_indices
     }, df
 
+# now that we have our indexes of the null values and the outliers 
+# based on the identified patterns in the data we create effective solutions to solve them 
+"""
+step 1 - find the most ideal method for the appropriate solution
+1- lagrange polynomial for the data points present in the middle really bad for extrapolation good for interpolation
+when less points are considered for imputation
+2 - splines is good for extrapolation 
+4 - polynomail interpolation can be used for a variety of use cases with higher degree good for more complex relationships and viceversa
+
+
+
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """

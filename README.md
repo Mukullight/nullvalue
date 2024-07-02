@@ -55,23 +55,37 @@ statsmodels==0.13.0
 tensorflow==2.8.0
 plotly==5.5.0
 ```
-
-# Getting started with the repository 
-
-```python
-
-
-
+## Installation
 
 ```
-
-Creating A Client
-```python
-
-
-
-
-
-
-
+pip install nulval
 ```
+
+# Usage guide
+ **loader loads and formats the data and auto fins the ideal solution**
+
+```python
+from nullval import loader
+
+path = "<enter the default path according to the environment>"
+# converts to dataframe
+data = loader.auto(path)
+# returns the index of the nulls and the outliers 
+loader.nulls_and_outs(data)
+```
+
+
+# Advantages and the Disadvantages of each of the method
+### Linear interpolation 
+#### Advantages
++ Easy to implement and less computational requirements
++ Quick to compute and effective for larger data sets with loads of missing values
++ have more local control, less sensitive to outliers, works well with noisy data, handles discontinous data well
+#### Disadvantages
+> not good for complex patterns, sharp corners, poor performance for smooth functions, requires higher order derivatives 
+### Lagarange interpolation 
++ Straight forward, tries to give the e fit
++ works for equidistant and the non equidistant points, no need to slove linear systems
+#### Disadvantages 
+> **Runge's phenomenon** for higher degree and the widely spaced points --> oscillations occur at edges of intervals leading to poor approximation
+> higher computational costs and does not work for dynamic dataset 

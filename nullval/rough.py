@@ -51,23 +51,11 @@ def plot_sin_cos_representation(A, B, y_points, start=-10, end=10):
     plt.scatter(x_points, y_points, c='black')
     plt.show()
 
-import sys
-
-
-# Your script code follows here...
-
-if __name__ == "__main__":
-    # Example usage of sys.argv
-    if len(sys.argv) < 2:
-        print("Usage: python rough.py <arg1> <arg2> ...")
-        sys.exit(1)
-    
-    # Convert command line arguments to floats
-    points = list(map(float, sys.argv[1:]))
+points = list(map(float, sys.argv[1:]))
     
     # Use points in your script
-    print("Points:", points)
+print("Points:", points)
     #points = list(map(float, sys.argv[1:]))
-    A, B = get_sin_cos_representation(points)
+A, B = get_sin_cos_representation(points)
 
-    plot_sin_cos_representation(A, B, points, start=-4*np.pi, end=4*np.pi)
+plot_sin_cos_representation(A, B, points, start=-4*np.pi, end=4*np.pi)
