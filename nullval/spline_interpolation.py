@@ -106,5 +106,5 @@ plot_cubic_spline_multi(x, y, x_new_sets, y_new_sets)
 
 '''
 
-x
+
 

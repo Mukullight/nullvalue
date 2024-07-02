@@ -14,10 +14,10 @@ Limitations: Can be sensitive to outliers and can oscillate between points (Rung
 ### plot the value of the data and find the best degree based on the dataset 
 
 
-
 def polynomial_interpolation(x, y, degree, x_new):
     """
-    Performs polynomial interpolation of given degree for the given data points and x_new.
+    Performs polynomial interpolation of given degree for the given data points and x_new, 
+    and calculates the error rate.
 
     Parameters:
     x (array-like): x-coordinates of the data points.
@@ -26,14 +26,27 @@ def polynomial_interpolation(x, y, degree, x_new):
     x_new (array-like): New x-coordinates for which to compute interpolated y values.
 
     Returns:
-    np.ndarray: Interpolated y-values corresponding to x_new.
+    tuple: Interpolated y-values corresponding to x_new, Mean Squared Error (MSE).
     """
+    # Fit polynomial to data
     coefficients = np.polyfit(x, y, degree)
     polynomial = np.poly1d(coefficients)
+    
+    # Compute interpolated y-values for new x-coordinates
     y_new = polynomial(x_new)
+    
+    # Calculate mean squared error (MSE)
+    y_pred = polynomial(x)
+    mse = np.mean((y - y_pred) ** 2)
+    
     return y_new
 
-
+'''
+coefficients = np.polyfit(x, y, degree)
+    polynomial = np.poly1d(coefficients)
+    y_new = polynomial(x_new)
+'''
+    
 ########################## plot the polynomial ################################################
 
 def plot_polynomial_interpolation(x, y, degree, x_new):
