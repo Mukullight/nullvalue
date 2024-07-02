@@ -95,6 +95,9 @@ def plot_trigonometric_interpolation(x_points, y_points, x_new, y_new):
     # Show plot
     fig.show()
 
+
+
+
 '''
 # Example usage:
 x_points = np.linspace(0, 2 * np.pi, 10)
@@ -165,7 +168,7 @@ def plot_sin_cos_representation(A, B, y_points, start=-10, end=10):
 
 
 if __name__ == '__main__':
-    points = list(map(float, sys.argv[1:]))
+    points = list(map(float, float(sys.argv[1:])))
     A, B = get_sin_cos_representation(points)
 
     plot_sin_cos_representation(A, B, points, start=-4*np.pi, end=4*np.pi)
