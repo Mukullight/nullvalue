@@ -63,7 +63,7 @@ pip install nulval
 
 # Usage guide
  **loader loads and formats the data and auto fins the ideal solution**
-
+## Step - 1 
 ```python
 from nullval import loader
 
@@ -74,7 +74,6 @@ data = loader.auto(path)
 loader.nulls_and_outs(data)
 ```
 
-
 # Advantages and the Disadvantages of each of the method
 ### Linear interpolation 
 #### Advantages
@@ -83,9 +82,18 @@ loader.nulls_and_outs(data)
 + have more local control, less sensitive to outliers, works well with noisy data, handles discontinous data well
 #### Disadvantages
 > not good for complex patterns, sharp corners, poor performance for smooth functions, requires higher order derivatives 
-### Lagarange interpolation 
+### Lagrange interpolation 
 + Straight forward, tries to give the e fit
 + works for equidistant and the non equidistant points, no need to slove linear systems
 #### Disadvantages 
 > **Runge's phenomenon** for higher degree and the widely spaced points --> oscillations occur at edges of intervals leading to poor approximation
-> higher computational costs and does not work for dynamic dataset 
+> higher computational costs and does not work for dynamic dataset, higher storage requirements
+### Splines interpolation
+#### Advantages
++ gives more local control by breaking down the domain into smaller fragments, more precise interpolation
++ smoother interpolation and reduces oscillations, differentiable, piecewise continous 
+#### Disadvantages 
+> More computataional effort, hard to choose appropriate boundaries, could lead to overfitting, takes significant resources, higher memory usage, beyond range interpolation
+
+
+
