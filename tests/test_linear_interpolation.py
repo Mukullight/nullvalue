@@ -3,8 +3,10 @@ from nullval import linear_interpolation
 import pytest
 import numpy as np
 
+
 def test_version():
-    assert __version__ == '0.1.0'
+    assert __version__ == "0.1.0"
+
 
 def test_li_int_simple():
     """
@@ -17,6 +19,7 @@ def test_li_int_simple():
     y_new = linear_interpolation.li_int(x_points, y_points, x_new)
     np.testing.assert_almost_equal(y_new, y_expected, decimal=5)
 
+
 def test_li_int_complex():
     """
     Test to see if it accepts mathematical functions and produce the values within the range domain(f(x))--> range(f(x))
@@ -28,9 +31,10 @@ def test_li_int_complex():
     assert len(y_new) == len(x_new)
     assert np.all((y_new >= -1) & (y_new <= 1))
 
+
 def test_li_int_non_monotonic():
     """
-    Checking to see if the function is strictly increasing or decreasing 
+    Checking to see if the function is strictly increasing or decreasing
     """
     x_points = np.array([0, 3, 2, 1])
     y_points = np.array([0, 9, 4, 1])
@@ -38,13 +42,15 @@ def test_li_int_non_monotonic():
     with pytest.raises(ValueError, match="x_points must be strictly monotonic"):
         linear_interpolation.li_int(x_points, y_points, x_new)
 
+
 def test_li_int_mismatched_lengths():
     """
-    Checking to see if the array lengths math 
+    Checking to see if the array lengths math
     """
     x_points = np.array([0, 1, 2])
     y_points = np.array([0, 1])
     x_new = np.array([0.5, 1.5])
-    with pytest.raises(ValueError, match="x_points and y_points must have the same length"):
+    with pytest.raises(
+        ValueError, match="x_points and y_points must have the same length"
+    ):
         linear_interpolation.li_int(x_points, y_points, x_new)
-

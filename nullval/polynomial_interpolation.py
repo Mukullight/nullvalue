@@ -2,21 +2,21 @@ import numpy as np
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
-'''Polynomial Interpolation (e.g., Lagrange, Newton):
+"""Polynomial Interpolation (e.g., Lagrange, Newton):
 
 Use Case: When higher accuracy is needed and the underlying function is well approximated by a polynomial over the interpolation range.
 Advantages: Can provide high accuracy with sufficient data points.
 Limitations: Can be sensitive to outliers and can oscillate between points (Runge's phenomenon).
-'''
+"""
 
 ###### find the ideal degree depending on the value of the polynomial ??????????????????################
 
-### plot the value of the data and find the best degree based on the dataset 
+### plot the value of the data and find the best degree based on the dataset
 
 
 def polynomial_interpolation(x, y, degree, x_new):
     """
-    Performs polynomial interpolation of given degree for the given data points and x_new, 
+    Performs polynomial interpolation of given degree for the given data points and x_new,
     and calculates the error rate.
 
     Parameters:
@@ -31,23 +31,25 @@ def polynomial_interpolation(x, y, degree, x_new):
     # Fit polynomial to data
     coefficients = np.polyfit(x, y, degree)
     polynomial = np.poly1d(coefficients)
-    
+
     # Compute interpolated y-values for new x-coordinates
     y_new = polynomial(x_new)
-    
+
     # Calculate mean squared error (MSE)
     y_pred = polynomial(x)
     mse = np.mean((y - y_pred) ** 2)
-    
+
     return y_new
 
-'''
+
+"""
 coefficients = np.polyfit(x, y, degree)
     polynomial = np.poly1d(coefficients)
     y_new = polynomial(x_new)
-'''
-    
+"""
+
 ########################## plot the polynomial ################################################
+
 
 def plot_polynomial_interpolation(x, y, degree, x_new):
     """
@@ -67,30 +69,36 @@ def plot_polynomial_interpolation(x, y, degree, x_new):
 
     # Scatter plot of original data points
     fig.add_trace(
-        go.Scatter(x=x, y=y, mode='markers', name='Data Points'),
-        row=1, col=1
+        go.Scatter(x=x, y=y, mode="markers", name="Data Points"), row=1, col=1
     )
 
     # Line plot of interpolated data
     fig.add_trace(
-        go.Scatter(x=x_new, y=y_new, mode='lines', name=f'Polynomial Interpolation (Degree {degree})'),
-        row=1, col=1
+        go.Scatter(
+            x=x_new,
+            y=y_new,
+            mode="lines",
+            name=f"Polynomial Interpolation (Degree {degree})",
+        ),
+        row=1,
+        col=1,
     )
 
     # Update layout
     fig.update_layout(
-        title=f'Polynomial Interpolation (Degree {degree})',
-        xaxis_title='x',
-        yaxis_title='y',
+        title=f"Polynomial Interpolation (Degree {degree})",
+        xaxis_title="x",
+        yaxis_title="y",
         showlegend=True,
         legend=dict(x=0.7, y=1.1),
-        template='plotly_white'
+        template="plotly_white",
     )
 
     # Show plot
     fig.show()
 
-'''
+
+"""
 # Example usage:
 x = np.array([1.0, 2.0, 3.0, 4.0])
 y = np.array([1.0, 4.0, 9.0, 16.0])
@@ -101,4 +109,4 @@ x_new = np.linspace(min(x), max(x), 100)  # New x-values for interpolation
 plot_polynomial_interpolation(x, y, degree, x_new)
 
 
-'''
+"""

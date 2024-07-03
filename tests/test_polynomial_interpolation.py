@@ -1,8 +1,12 @@
 import pytest
 import numpy as np
 from plotly.io import to_json
-from nullval import polynomial_interpolation #import polynomial_interpolation, plot_polynomial_interpolation
+from nullval import (
+    polynomial_interpolation,
+)  # import polynomial_interpolation, plot_polynomial_interpolation
 from nullval.polynomial_interpolation import plot_polynomial_interpolation
+
+
 def test_polynomial_interpolation_simple():
     """
     Test polynomial interpolation with a simple dataset.
@@ -12,7 +16,7 @@ def test_polynomial_interpolation_simple():
     degree = 2
     x_new = np.linspace(min(x), max(x), 100)
     y_new = polynomial_interpolation(x, y, degree, x_new)
-    
+
     # Verify the length of the output and ensure values are finite
     assert len(y_new) == pytest.approx(len(x_new))
     assert np.all(np.isfinite(y_new))
@@ -27,11 +31,10 @@ def test_polynomial_interpolation_high_degree():
     degree = 4
     x_new = np.linspace(min(x), max(x), 100)
     y_new = polynomial_interpolation(x, y, degree, x_new)
-    
+
     # Verify the length of the output and ensure values are finite
     assert len(y_new) == len(x_new)
     assert np.isfinite(y_new).all()
-
 
 
 def test_polynomial_interpolation_mismatched_lengths():
@@ -44,6 +47,7 @@ def test_polynomial_interpolation_mismatched_lengths():
     x_new = np.linspace(min(x), max(x), 100)
     with pytest.raises(TypeError):
         polynomial_interpolation(x, y, degree, x_new)
+
 
 """
 def test_plot_polynomial_interpolation_runs():
@@ -62,12 +66,3 @@ def test_plot_polynomial_interpolation_runs():
 
 
 """
-
-
-
-
-
-
-
-
-

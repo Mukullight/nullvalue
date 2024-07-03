@@ -1,11 +1,11 @@
-import numpy as np 
+import numpy as np
 import pandas as pd
 import xml.etree.ElementTree as ET
 
 
-
 ############### loading the required files #############################################
 ################# formatting it to the required format ################################
+
 
 def load_to_df(file_path):
     """
@@ -19,25 +19,27 @@ def load_to_df(file_path):
     """
     try:
         # Determine file type based on extension
-        file_type = file_path.split('.')[-1].lower()
+        file_type = file_path.split(".")[-1].lower()
 
-        if file_type == 'csv':
+        if file_type == "csv":
             df = pd.read_csv(file_path)
-        elif file_type == 'xml':
+        elif file_type == "xml":
             tree = ET.parse(file_path)
             root = tree.getroot()
 
             data = []
-            for item in root.findall('row'):
+            for item in root.findall("row"):
                 row = {}
                 for child in item:
                     row[child.tag] = child.text
                 data.append(row)
 
             df = pd.DataFrame(data)
-        elif file_type in ['xls', 'xlsx']:
-            df = pd.read_excel(file_path, sheet_name='Sheet1')  # Specify sheet name if necessary
-        elif file_type == 'json':
+        elif file_type in ["xls", "xlsx"]:
+            df = pd.read_excel(
+                file_path, sheet_name="Sheet1"
+            )  # Specify sheet name if necessary
+        elif file_type == "json":
             df = pd.read_json(file_path)
         else:
             raise ValueError(f"Unsupported file type: {file_type}")
@@ -46,7 +48,7 @@ def load_to_df(file_path):
         print(f"Loaded {file_type.upper()} file successfully.")
         print("Columns:")
         print(df.columns)
-        
+
         return df
 
     except FileNotFoundError:
@@ -63,7 +65,6 @@ def load_to_df(file_path):
 ################### spotting the location of the outliers #####################
 
 
-
 def nulls_and_outs(df, q1=0.05, q3=0.95):
     """
     Finds the locations of null values and outliers in a DataFrame, and drops columns with categorical variables.
@@ -78,11 +79,11 @@ def nulls_and_outs(df, q1=0.05, q3=0.95):
     pd.DataFrame: The DataFrame after dropping categorical columns.
     """
     # Drop categorical columns
-    df = df.select_dtypes(exclude=['object', 'category'])
+    df = df.select_dtypes(exclude=["object", "category"])
 
     null_locations = {}
     outlier_indices = {}
-    
+
     # Identify null values
     nulls = df.isnull()
     for col in df.columns:
@@ -91,31 +92,32 @@ def nulls_and_outs(df, q1=0.05, q3=0.95):
             null_locations[col] = null_indices
 
     # Iterate over numeric columns
-    for col in df.select_dtypes(include='number').columns:
+    for col in df.select_dtypes(include="number").columns:
         # Calculate quartiles and IQR
         Q1 = df[col].quantile(q1)
         Q3 = df[col].quantile(q3)
         IQR = Q3 - Q1
-        
+
         # Define outlier boundaries
         lower_bound = Q1 - 1.5 * IQR
         upper_bound = Q3 + 1.5 * IQR
-        
+
         # Find indices of outliers
         outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)].index.tolist()
-        
+
         # Store outliers in dictionary
         outlier_indices[col] = outliers
-        
+
     return {
         "upper": upper_bound,
-        "lower":lower_bound,
-        'nulls': null_locations,
-        'outliers': outlier_indices
+        "lower": lower_bound,
+        "nulls": null_locations,
+        "outliers": outlier_indices,
     }, df
 
-# now that we have our indexes of the null values and the outliers 
-# based on the identified patterns in the data we create effective solutions to solve them 
+
+# now that we have our indexes of the null values and the outliers
+# based on the identified patterns in the data we create effective solutions to solve them
 """
 step 1 - find the most ideal method for the appropriate solution
 1- lagrange polynomial for the data points present in the middle really bad for extrapolation good for interpolation
@@ -127,19 +129,6 @@ when less points are considered for imputation
 
 
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 """

@@ -3,6 +3,7 @@ import numpy as np
 from plotly.io import to_json
 from nullval import spline_interpolation
 
+
 def test_compute_cubic_spline_multi_simple():
     """
     Test cubic spline interpolation with a simple dataset.
@@ -15,6 +16,7 @@ def test_compute_cubic_spline_multi_simple():
     assert len(y_new_sets[0]) == len(x_new_sets[0])
     assert np.isfinite(y_new_sets[0]).all()
 
+
 def test_compute_cubic_spline_multi_mismatched_lengths():
     """
     Test that the function raises a ValueError when x and y lengths do not match.
@@ -22,8 +24,11 @@ def test_compute_cubic_spline_multi_mismatched_lengths():
     x = np.array([0, 1, 2, 3, 4, 5])
     y = np.array([0, 1, 4, 1, 0])
     x_new_sets = [np.linspace(0, 5, 100)]
-    with pytest.raises(ValueError, match="The input arrays x and y must have the same length."):
+    with pytest.raises(
+        ValueError, match="The input arrays x and y must have the same length."
+    ):
         spline_interpolation.compute_cubic_spline_multi(x, y, x_new_sets)
+
 
 def test_compute_cubic_spline_multi_insufficient_points():
     """
@@ -32,8 +37,13 @@ def test_compute_cubic_spline_multi_insufficient_points():
     x = np.array([0])
     y = np.array([0])
     x_new_sets = [np.linspace(0, 5, 100)]
-    with pytest.raises(ValueError, match="At least two data points are required for spline interpolation."):
+    with pytest.raises(
+        ValueError,
+        match="At least two data points are required for spline interpolation.",
+    ):
         spline_interpolation.compute_cubic_spline_multi(x, y, x_new_sets)
+
+
 '''
 @pytest.mark.timeout(30)
 def test_plot_cubic_spline_multi_runs():

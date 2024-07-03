@@ -3,8 +3,6 @@ from nullval import lagrange_interpolation
 import pytest
 
 
-
-
 def test_basic_functionality():
     """
     Test basic functionality with a simple set of points.
@@ -13,10 +11,9 @@ def test_basic_functionality():
     y_points = np.array([1, 3, 2])
     x_new = np.array([0.5, 1.5])
     # Corrected expected values based on manual calculation / Wolfram Alpha
-    expected_result = np.array([2.370, 2.870])  
+    expected_result = np.array([2.370, 2.870])
     result = lagrange_interpolation.lagrange_interpolation(x_points, y_points, x_new)
     np.testing.assert_almost_equal(result, expected_result, decimal=2)
-
 
 
 def test_single_point():
@@ -30,6 +27,7 @@ def test_single_point():
     result = lagrange_interpolation.lagrange_interpolation(x_points, y_points, x_new)
     np.testing.assert_almost_equal(result, expected_result, decimal=5)
 
+
 def test_multiple_points():
     """
     Test interpolation with a more complex set of data points.
@@ -41,6 +39,7 @@ def test_multiple_points():
     result = lagrange_interpolation.lagrange_interpolation(x_points, y_points, x_new)
     np.testing.assert_almost_equal(result, expected_result, decimal=3)
 
+
 def test_linear_function():
     """
     Test interpolation on a simple linear function to check correctness.
@@ -51,6 +50,7 @@ def test_linear_function():
     expected_result = np.array([0.5, 1.5, 2])
     result = lagrange_interpolation.lagrange_interpolation(x_points, y_points, x_new)
     np.testing.assert_almost_equal(result, expected_result, decimal=5)
+
 
 def test_error_handling():
     """
