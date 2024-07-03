@@ -94,6 +94,26 @@ loader.nulls_and_outs(data)
 + smoother interpolation and reduces oscillations, differentiable, piecewise continous 
 #### Disadvantages 
 > More computataional effort, hard to choose appropriate boundaries, could lead to overfitting, takes significant resources, higher memory usage, beyond range interpolation
+### Polynomial interpolation 
+#### Advantages 
++ gives the exact fit, provides analytical expression for further theoretical analysis 
++ allows for flexibility in choosing the base polynomial 
+#### Disadvantages 
+> same as those of lagrange 
+### Trigonometric interpolation
+#### Advantages
++ Most natural fit for periodic data and capture harmonics well, gives high precision for smooth functions
++ avoids runge phenomenon, fast computation with fft and basis function
+#### Disadvantages 
+> non periodic data issues, discontinous boundary effects, global nature 
+
+
+
+
+
+
+
+
 
 
 
