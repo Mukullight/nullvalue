@@ -4,7 +4,7 @@ from plotly.subplots import make_subplots
 import sys
 import math
 import matplotlib.pyplot as plt
-
+"""
 def trigonometric_interpolation(x, y, x_new):
     """
     Performs trigonometric interpolation for the given data points.
@@ -177,3 +177,4 @@ if __name__ == '__main__':
     plot_sin_cos_representation(A, B, points, start=-4*np.pi, end=4*np.pi)
 
 '''
+"""
