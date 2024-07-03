@@ -32,31 +32,7 @@ def trigonometric_interpolation(x, y, x_new):
     return y_new.real
 
 
-def trigonometric_interpolation(x, y, x_new):
-    """
-    Performs trigonometric interpolation for the given data points.
 
-    Parameters:
-    x (array-like): x-coordinates of the data points.
-    y (array-like): y-coordinates of the data points.
-    x_new (array-like): New x-coordinates for which to compute interpolated y values.
-
-    Returns:
-    np.ndarray: Interpolated y-values corresponding to x_new.
-    """
-    N = len(x)
-    if N % 2 == 0:
-        k = np.arange(-N//2, N//2)
-    else:
-        k = np.arange(-(N-1)//2, (N+1)//2)
-    
-    Y_k = np.fft.fftshift(np.fft.fft(y)) / N
-    y_new = np.zeros_like(x_new, dtype=np.complex128)
-
-    for i, k_val in enumerate(k):
-        y_new += Y_k[i] * np.exp(2j * np.pi * k_val * x_new / N)
-    
-    return y_new.real
 
 def plot_trigonometric_interpolation(x_points, y_points, x_new, y_new):
     """
@@ -110,6 +86,33 @@ y_new = trigonometric_interpolation(x_points, y_points, x_new)
 
 # Plot using plot_trigonometric_interpolation function
 plot_trigonometric_interpolation(x_points, y_points, x_new, y_new)
+
+
+def trigonometric_interpolation(x, y, x_new):
+    """
+    Performs trigonometric interpolation for the given data points.
+
+    Parameters:
+    x (array-like): x-coordinates of the data points.
+    y (array-like): y-coordinates of the data points.
+    x_new (array-like): New x-coordinates for which to compute interpolated y values.
+
+    Returns:
+    np.ndarray: Interpolated y-values corresponding to x_new.
+    """
+    N = len(x)
+    if N % 2 == 0:
+        k = np.arange(-N//2, N//2)
+    else:
+        k = np.arange(-(N-1)//2, (N+1)//2)
+    
+    Y_k = np.fft.fftshift(np.fft.fft(y)) / N
+    y_new = np.zeros_like(x_new, dtype=np.complex128)
+
+    for i, k_val in enumerate(k):
+        y_new += Y_k[i] * np.exp(2j * np.pi * k_val * x_new / N)
+    
+    return y_new.real
 '''
 
 
@@ -166,9 +169,11 @@ def plot_sin_cos_representation(A, B, y_points, start=-10, end=10):
     plt.scatter(x_points, y_points, c='black')
     plt.show()
 
-
+'''
 if __name__ == '__main__':
     points = list(map(float, float(sys.argv[1:])))
     A, B = get_sin_cos_representation(points)
 
     plot_sin_cos_representation(A, B, points, start=-4*np.pi, end=4*np.pi)
+
+'''

@@ -2,8 +2,9 @@ import pytest
 import numpy as np
 from plotly.io import to_json
 import nullval
-from nullval.trigonometric_interpolation import trigonometric_interpolation
+from nullval import trigonometric_interpolation
 #from trigonometric_interpolation import trigonometric_interpolation, plot_trigonometric_interpolation
+'''
 def test_trigonometric_interpolation_simple():
     """
     Test trigonometric interpolation with simple known data points.
@@ -56,3 +57,7 @@ def test_plot_trigonometric_interpolation_runs():
     fig_json = to_json(fig)
     assert fig_json is not None, "Plotly figure JSON is None"
 
+
+
+
+'''

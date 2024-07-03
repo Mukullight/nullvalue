@@ -83,8 +83,8 @@ loader.nulls_and_outs(data)
 #### Disadvantages
 > not good for complex patterns, sharp corners, poor performance for smooth functions, requires higher order derivatives 
 ### Lagrange interpolation 
-+ Straight forward, tries to give the e fit
-+ works for equidistant and the non equidistant points, no need to slove linear systems
++ Straight forward, tries to give the best fit
++ works for equidistant and the non equidistant points, no need to solve linear systems
 #### Disadvantages 
 > **Runge's phenomenon** for higher degree and the widely spaced points --> oscillations occur at edges of intervals leading to poor approximation
 > higher computational costs and does not work for dynamic dataset, higher storage requirements
