@@ -24,14 +24,22 @@ nullvalue/
 ├── .gitignore
 │
 ├── nullval/
-│ ├── init.py
+│ ├── __init__.py
 │ ├── cubic_spline_interpolation.py
 │ ├── linear_interpolation.py
 │ └── loader.py
+| |__ polynomial_interpolation.py
+| |__ splines_interpolation.py
+| |__ trigonometric_interpolation.py
+| |__ auto.py
 │
 ├── tests/
 │ ├── init.py
-│ └── test_nullval.py
+│ └── test_lagrange_interpolation.py
+| |__ test_linear_interpolation.py
+| |__ test_polynomial_interpolation.py
+| |__ test_spline_interpolation.py
+| |__ test_trigonometric_interpolation.py
 │
 ├── api_reference.md
 │
